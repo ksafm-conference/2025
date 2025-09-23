@@ -1,3 +1,4 @@
+ export const FAVICON_IMAGE= "ksafm_logo.ico"
  export const ICON_IMAGE = "icon.png";
  export const PROGRAM_IMAGE = 'program/schedule/program_image.jpg'
 
