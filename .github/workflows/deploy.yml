@@ -1,22 +1,43 @@
-# .github/workflows/deploy.yml (수정)
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment: github-pages   # ← 추가! 이 job도 github-pages 환경의 secrets 사용
+    # Environment secrets를 쓰고 있다면 아래 줄 필수
+    environment: github-pages
+
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
+
       - run: npm ci
 
       - name: Set env
         run: |
-          echo "NEXT_PUBLIC_KAKAO_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_APP_KEY }}" >> $GITHUB_ENV
           echo "GITHUB_PAGES=true" >> $GITHUB_ENV
+          # Environment secrets 또는 Repository secrets 중 사용하는 쪽에 이름 맞추기
+          echo "NEXT_PUBLIC_KAKAO_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_APP_KEY }}" >> $GITHUB_ENV
 
-      - name: Build (static export via next build)
+      - name: Build (static)
         run: npm run build
 
       - name: Upload artifact

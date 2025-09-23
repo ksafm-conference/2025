@@ -5,7 +5,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "predeploy": "cross-env NEXT_PUBLIC_KAKAO_APP_KEY=$NEXT_PUBLIC_KAKAO_APP_KEY npm run build && npm run export",
+    "predeploy": "cross-env NEXT_PUBLIC_KAKAO_APP_KEY=$NEXT_PUBLIC_KAKAO_APP_KEY npm run build",
     "deploy": "gh-pages -d out -b gh-pages -t true"
   },
   "dependencies": {
