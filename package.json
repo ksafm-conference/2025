@@ -1,6 +1,7 @@
 {
   "name": "2025",
   "private": true,
+  "homepage": "https://ksafm-conference.github.io/2025/",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
