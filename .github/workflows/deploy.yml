@@ -1,0 +1,52 @@
+# .github/workflows/deploy.yml
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      # (선택) 환경변수 주입
+      - name: Set env
+        run: |
+          echo "NEXT_PUBLIC_KAKAO_APP_KEY=${{ secrets.NEXT_PUBLIC_KAKAO_APP_KEY }}" >> $GITHUB_ENV
+          echo "GITHUB_PAGES=true" >> $GITHUB_ENV
+
+      - name: Build (static export via next build)
+        run: npm run build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out   # ✅ next build가 만든 정적 산출물
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
