@@ -11,6 +11,7 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily:{standard : ["Pretendard"]},
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
