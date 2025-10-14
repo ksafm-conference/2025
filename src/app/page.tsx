@@ -3,8 +3,6 @@ import Link from "next/link";
 import {
   Calendar,
   MapPin,
-  FileText,
-  Users,
   BookOpen,
   ArrowRight,
   Newspaper,
@@ -12,6 +10,7 @@ import {
 } from "lucide-react";
 import { externalLinks } from "@/data/nav";
 import { home } from "@/data/home";
+import { getHomeNotices } from "@/data/notices";
 
 export default function Page() {
   // 메인 CTA 3개 정의
@@ -141,7 +140,7 @@ export default function Page() {
 
           {/* 우측 Important Dates 박스 */}
           <div className="rounded-[14px] border bg-white p-5 shadow-sm">
-            <h2 className="mb-3 flex items-center gap-2 text-[16px] md:text-xl font-semibold">
+            <h2 className="mb-3 flex items-center gap-2 text-2xl font-semibold">
               <Calendar className="h-5 w-5" />
               주요 일정
             </h2>
@@ -150,12 +149,8 @@ export default function Page() {
                 <li key={d.date} className="flex items-start gap-3">
                   <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-800" />
                   <div>
-                    <p className="font-medium text-[14px] md:text-sm">
-                      {d.label}
-                    </p>
-                    <p className="text-[13px] md:text-sm text-gray-600">
-                      {d.date}
-                    </p>
+                    <p className="font-medium text-lg md:text-xl">{d.label}</p>
+                    <p className="text-lg md:text-xl text-gray-600">{d.date}</p>
                   </div>
                 </li>
               ))}
@@ -173,19 +168,19 @@ export default function Page() {
               <Newspaper className="h-5 w-5" />
               <h2 className="text-[18px] md:text-xl font-bold">공지사항</h2>
             </div>
+
             <ul className="divide-y rounded-[14px] border bg-white">
-              {home.notices.map((n) => (
-                <li
-                  key={n.title}
-                  className="group flex items-center justify-between px-4 py-3 hover:bg-gray-50"
-                >
+              {getHomeNotices(6).map((n) => (
+                <li key={n.title} className="hover:bg-gray-50">
                   <Link
                     href={n.href}
-                    className="text-[14px] md:text-base text-gray-800 group-hover:underline"
+                    target={n.external ? "_blank" : undefined}
+                    rel={n.external ? "noopener noreferrer" : undefined}
+                    className="flex w-full items-center justify-between px-4 py-3 text-base md:text-lg text-gray-800"
                   >
-                    {n.title}
+                    <span className="group-hover:underline">{n.title}</span>
+                    <ArrowRight className="h-4 w-4 text-gray-500" />
                   </Link>
-                  <ArrowRight className="h-4 w-4 text-gray-500" />
                 </li>
               ))}
             </ul>
@@ -197,10 +192,10 @@ export default function Page() {
               href="/about/overview"
               className="block rounded-[14px] border p-4 shadow-sm transition hover:shadow"
             >
-              <h3 className="mb-1 flex items-center gap-2 text-[15px] md:text-base font-semibold text-gray-900">
+              <h3 className="mb-1 flex items-center gap-2 text-base md:text-xl font-semibold text-gray-900">
                 <BookOpen className="h-5 w-5" /> 학술대회 개요
               </h3>
-              <p className="text-[13px] md:text-sm text-gray-600">
+              <p className="text-sm md:text-lg text-gray-700">
                 행사 목적·주제·세부 분야 안내
               </p>
             </Link>
@@ -208,10 +203,10 @@ export default function Page() {
               href="/program/schedule"
               className="block rounded-[14px] border p-4 shadow-sm transition hover:shadow"
             >
-              <h3 className="mb-1 flex items-center gap-2 text-[15px] md:text-base font-semibold text-gray-900">
+              <h3 className="mb-1 flex items-center gap-2 text-base md:text-xl font-semibold text-gray-900">
                 <Calendar className="h-5 w-5" /> 행사 일정표
               </h3>
-              <p className="text-[13px] md:text-sm text-gray-600">
+              <p className="text-sm md:text-lg text-gray-700">
                 세션 시간표 및 장소
               </p>
             </Link>
@@ -219,10 +214,10 @@ export default function Page() {
               href="/contact"
               className="block rounded-[14px] border p-4 shadow-sm transition hover:shadow"
             >
-              <h3 className="mb-1 flex items-center gap-2 text-[15px] md:text-base font-semibold text-gray-900">
+              <h3 className="mb-1 flex items-center gap-2 text-base md:text-xl font-semibold text-gray-900">
                 <MapPin className="h-5 w-5" /> 오시는 길
               </h3>
-              <p className="text-[13px] md:text-sm text-gray-600">
+              <p className="text-sm md:text-lg text-700">
                 장소 및 교통·숙박 안내
               </p>
             </Link>
