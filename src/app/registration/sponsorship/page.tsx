@@ -2,34 +2,34 @@
 // FILE: src/app/exhibition/page.tsx
 // 전시/협찬 안내 (root: /exhibition)
 // =====================================
-import Link from 'next/link';
-import { Mail, Phone } from 'lucide-react';
+import Link from "next/link";
+import { Mail, Phone } from "lucide-react";
 
 // 운영/문의: 학회 공식 연락처 (사용자가 제공한 정보)
 const CONTACT = {
-  email: 'ksafm1@gmail.com',
-  phone: '070-4417-7125',
+  email: "ksafm1@gmail.com",
+  phone: "070-4417-7125",
 };
 
 export default function Page() {
   return (
-    <main className='mx-auto max-w-6xl px-4 py-10'>
+    <main className="mx-auto max-w-6xl px-4 py-10">
       {/* breadcrumb */}
-      <nav className='mb-6 text-sm text-gray-600' aria-label='breadcrumb'>
-        <ol className='flex flex-wrap items-center gap-2'>
+      <nav className="mb-6 text-sm text-gray-600" aria-label="breadcrumb">
+        <ol className="flex flex-wrap items-center gap-2">
           <li>
-            <Link href='/' className='hover:underline'>
+            <Link href="/" className="hover:underline">
               홈
             </Link>
           </li>
-          <li className='text-gray-400'>/</li>
-          <li aria-current='page' className='font-medium text-gray-900'>
+          <li className="text-gray-400">/</li>
+          <li aria-current="page" className="font-medium text-gray-900">
             전시/협찬
           </li>
         </ol>
       </nav>
 
-      <h1 className='mb-6 text-2xl font-bold md:text-3xl'>전시/협찬 안내</h1>
+      <h1 className="mb-6 text-2xl font-bold md:text-3xl">전시/협찬 안내</h1>
 
       {/* <section className='rounded-2xl border bg-white p-6 shadow-sm'>
         <h2 className='mb-3 text-lg font-semibold'>안내</h2>
@@ -40,14 +40,16 @@ export default function Page() {
         </ul>
       </section> */}
 
-      <section className='mt-8 rounded-2xl border bg-white p-6 shadow-sm'>
-        <h2 className='mb-3 text-lg font-semibold'>문의</h2>
-        <div className='space-y-2 text-sm text-gray-800'>
-          <p className='inline-flex items-center gap-2'>
-            <Mail className='h-4 w-4' /> {CONTACT.email}
+      <section className="mt-8 rounded-2xl border bg-white p-6 shadow-sm">
+        <h2 className="mb-3 text-2xl font-semibold">문의</h2>
+        <div className="space-y-2 text-xl text-gray-800">
+          <p className="inline-flex items-center gap-2">
+            <Mail className="h-4 w-4" /> {CONTACT.email}
           </p>
-          <p className='inline-flex items-center gap-2'>
-            <Phone className='h-4 w-4' /> {CONTACT.phone}
+          <br />
+
+          <p className="inline-flex items-center gap-2">
+            <Phone className="h-4 w-4" /> {CONTACT.phone}
           </p>
         </div>
       </section>

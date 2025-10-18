@@ -43,24 +43,24 @@ export const NOTICES: Notice[] = [
     pinHome: true,
   },
 
-  {
-    id: "notice-68",
-    title: "발표 진행 안내",
-    date: "2025-06-10",
-    pinned: true,
-    showOnHome: true,
-    contentHtml: `
-      <p><strong style="color:#d32f2f">구두 발표</strong> 슬라이드는 행사 전 이메일(<a href="mailto:ksafm2@gmail.com">ksafm2@gmail.com</a>)로 보내주세요.</p>
-      <ul style="margin:.5rem 0 0 1rem;list-style:disc">
-        <li>발표 시간: 12분 발표 + 3분 질의</li>
-        <li>포스터 부착: <span style="color:#1976d2">B동 1층 로비</span></li>
-      </ul>
-      <p style="margin:.75rem 0 0">자세한 위치 안내는 아래 이미지를 참고하세요.</p>
-      <p style="margin:.5rem 0 0">
-        <img src="/program/schedule/program_image.jpg" alt="포스터 부착 위치" style="max-width:100%;height:auto;border:1px solid #eee;border-radius:8px" />
-      </p>
-    `,
-  },
+  // {
+  //   id: "notice-68",
+  //   title: "발표 진행 안내",
+  //   date: "2025-06-10",
+  //   pinned: true,
+  //   showOnHome: true,
+  //   contentHtml: `
+  //     <p><strong style="color:#d32f2f">구두 발표</strong> 슬라이드는 행사 전 이메일(<a href="mailto:ksafm2@gmail.com">ksafm2@gmail.com</a>)로 보내주세요.</p>
+  //     <ul style="margin:.5rem 0 0 1rem;list-style:disc">
+  //       <li>발표 시간: 12분 발표 + 3분 질의</li>
+  //       <li>포스터 부착: <span style="color:#1976d2">B동 1층 로비</span></li>
+  //     </ul>
+  //     <p style="margin:.75rem 0 0">자세한 위치 안내는 아래 이미지를 참고하세요.</p>
+  //     <p style="margin:.5rem 0 0">
+  //       <img src="/program/schedule/program_image.jpg" alt="포스터 부착 위치" style="max-width:100%;height:auto;border:1px solid #eee;border-radius:8px" />
+  //     </p>
+  //   `,
+  // },
 ];
 
 /** 홈 공지 리스트 생성 (pinHome 우선 > pinned > 날짜 내림차순) */

@@ -4,6 +4,7 @@ import { Mail, Building2 } from "lucide-react";
 import { SPEAKERS, type Speaker } from "@/data/program";
 import SectionTitle from "@/components/SectionTitle";
 import { ICON_IMAGE } from "@/data/source_path";
+import ComingSoon from "@/components/ComingSoon";
 
 type AnySpeaker = (typeof SPEAKERS)[number];
 
@@ -64,19 +65,18 @@ export default function Page() {
 
       {/* <h1 className='mb-8 text-2xl font-bold md:text-3xl'>초청 연사 (Speakers)</h1> */}
 
-      {!hasData ? (
-        <div className="rounded-2xl border bg-white p-6 text-sm text-gray-600">
-          연사 정보가 아직 등록되지 않았습니다. <br />
-        </div>
+      {1 ? (
+        <ComingSoon />
       ) : (
         <>
           {/* 분야 빠른이동(선택) */}
-          {/* <div className='mb-6 flex flex-wrap gap-2 text-sm'>
+          {/* <div className="mb-6 flex flex-wrap gap-2 text-sm">
             {groupNames.map((g) => (
               <a
                 key={g}
                 href={`#field-${encodeURIComponent(g)}`}
-                className='rounded-full border px-3 py-1 hover:bg-gray-50'>
+                className="rounded-full border px-3 py-1 hover:bg-gray-50"
+              >
                 {g}
               </a>
             ))}

@@ -69,18 +69,21 @@ export default function Page() {
             포스터 발표자는 행사장의 지정된 장소에 포스터를 부착합니다.
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            포스터 세션: 한국농수산대학교 융합교육관
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            포스터 부착: 6월 24일 12:00 ~
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            포스터 철거: 6월 25일 12:00 ~
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             포스터 크기: A0 (가로 841mm * 세로 1189mm, 가로 900mm 이하가 되도록
             권장)
           </li>
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            장소 및 시간 : 추후 공지
+          </li>
+          {/* <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            포스터 세션: 한국농수산대학교 융합교육관
+          </li>
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            포스터 부착: 12월 04일 12:00 ~
+          </li>
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            포스터 철거: 12월 05일 12:00 ~
+          </li> */}
         </ul>
       </section>
     </main>
