@@ -6,7 +6,8 @@ import {
   BookOpen,
   ArrowRight,
   Newspaper,
-  ChevronRight, // ▶ 추가: 화살표 아이콘
+  ChevronRight,
+  Pin, // ▶ 추가: 화살표 아이콘
 } from "lucide-react";
 import { externalLinks } from "@/data/nav";
 import { home } from "@/data/home";
@@ -163,6 +164,7 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 py-10">
         <div className="grid gap-6 md:grid-cols-3">
           {/* 공지 리스트 */}
+          {/* 공지 리스트 */}
           <div className="md:col-span-2">
             <div className="mb-3 flex items-center gap-2">
               <Newspaper className="h-5 w-5" />
@@ -176,9 +178,26 @@ export default function Page() {
                     href={n.href}
                     target={n.external ? "_blank" : undefined}
                     rel={n.external ? "noopener noreferrer" : undefined}
-                    className="flex w-full items-center justify-between px-4 py-3 text-base md:text-lg text-gray-800"
+                    className="group flex w-full items-center justify-between px-4 py-3 text-base md:text-lg text-gray-800"
                   >
-                    <span className="group-hover:underline">{n.title}</span>
+                    <span className="inline-flex items-center gap-2">
+                      {/* ✅ 핀 아이콘 (상단고정) */}
+                      {n.pin && (
+                        <Pin
+                          className="h-4 w-4 text-indigo-700"
+                          aria-label="상단 고정"
+                        />
+                      )}
+                      {/* 제목 */}
+                      <span className="group-hover:underline">{n.title}</span>
+                      {/* ✅ NEW 배지 (최근 글) */}
+                      {n.isNew && (
+                        <span className="ml-1 inline-flex items-center rounded-full border-[0.5px] border-red-200 bg-red-50 px-0.5 py-1 text-[8px] leading-none              font-semibold text-red-600">
+                          NEW
+                        </span>
+                      )}
+                    </span>
+
                     <ArrowRight className="h-4 w-4 text-gray-500" />
                   </Link>
                 </li>

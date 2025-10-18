@@ -2,16 +2,14 @@
 export type Notice = {
   id?: string;
   title: string;
-  /** 기존 짧은 내용(선택) */
   content?: string;
-  /** ✅ HTML 전체를 그대로 넣어 꾸밀 수 있음 */
   contentHtml?: string;
-  date?: string;
-  pinned?: boolean;
-  showOnHome?: boolean;
-  href?: string;
+  date?: string; // "YYYY-MM-DD"
+  pinned?: boolean; // 상세 페이지 상단 고정
+  showOnHome?: boolean; // 홈에 노출
+  href?: string; // 외부/내부 링크
   external?: boolean;
-  pinHome?: boolean;
+  pinHome?: boolean; // ✅ 홈 목록 상단 고정
   images?: string[];
   attachments?: {
     label: string;
@@ -24,13 +22,15 @@ export type Notice = {
   }[];
 };
 
+const RECENT_DAYS = 14;
+
 /** 한 곳에서 공지 관리 */
 export const NOTICES: Notice[] = [
   {
     title: "2025 동계학술대회 사이트 오픈 및 초록 제출/등록 안내",
     href: "/submission",
     content: "초록 제출/등록 방법 안내 페이지로 이동합니다.",
-    date: "2025-06-05",
+    date: "2025-10-15",
     showOnHome: true,
     pinHome: true,
   },
@@ -38,7 +38,7 @@ export const NOTICES: Notice[] = [
     href: "/submission/guideline",
     title: "발표 진행 안내 (발표 시간, 포스터 부착 위치 등)",
     content: "발표 시간과 포스터 부착 위치 등 진행 안내를 확인하세요.",
-    date: "2025-06-05",
+    date: "2025-10-15",
     showOnHome: true,
     pinHome: true,
   },
@@ -63,18 +63,15 @@ export const NOTICES: Notice[] = [
   // },
 ];
 
-/** 홈 공지 리스트 생성 (pinHome 우선 > pinned > 날짜 내림차순) */
+/** 홈 공지 리스트 (pinHome > pinned > 최신순) + 표시용 플래그 전달 */
 export function getHomeNotices(limit = 6) {
   const sorted = [...NOTICES]
     .filter((n) => n.showOnHome ?? true)
     .sort((a, b) => {
-      // 1) 메인 고정 우선
       if (!!b.pinHome !== !!a.pinHome)
         return Number(!!b.pinHome) - Number(!!a.pinHome);
-      // 2) (옵션) pinned도 고려하고 싶으면 다음 줄 유지
       if (!!b.pinned !== !!a.pinned)
         return Number(!!b.pinned) - Number(!!a.pinned);
-      // 3) 최신 날짜 먼저
       const da = a.date ? new Date(a.date).getTime() : 0;
       const db = b.date ? new Date(b.date).getTime() : 0;
       return db - da;
@@ -84,10 +81,13 @@ export function getHomeNotices(limit = 6) {
     title: n.title,
     href: buildNoticeHref(n),
     external: n.external ?? isExternal(n.href),
+    /** ✅ 홈에서 아이콘 표시용 */
+    pin: !!n.pinHome || !!n.pinned,
+    /** ✅ 최근(NEW) 표시 */
+    isNew: isRecent(n.date),
   }));
 }
 
-/** href 우선, 없으면 /about/notice#notice-<id> */
 export function buildNoticeHref(n: Notice): string {
   if (n.href) return n.href;
   if (n.id) return `/about/notice#notice-${n.id}`;
@@ -96,4 +96,11 @@ export function buildNoticeHref(n: Notice): string {
 
 function isExternal(href?: string) {
   return !!href && /^https?:\/\//i.test(href);
+}
+
+function isRecent(dateStr?: string, days = RECENT_DAYS) {
+  if (!dateStr) return false;
+  const t = new Date(dateStr).getTime();
+  if (Number.isNaN(t)) return false;
+  return Date.now() - t <= days * 24 * 60 * 60 * 1000;
 }
