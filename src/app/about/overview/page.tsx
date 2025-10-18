@@ -40,17 +40,17 @@ export default function Page() {
         </SectionTitle>
         <ul className="list-none space-y-2 text-lg text-gray-800">
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            한국농수산대학교 융합교육관
+            여수베네치아호텔앤스위트
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             웹사이트:{" "}
             <a
-              href="https://www.af.ac.kr/"
+              href="https://www.yeosuvenezia.com/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline underline-offset-2"
             >
-              www.af.ac.kr
+              https://www.yeosuvenezia.com/
             </a>
           </li>
         </ul>
@@ -61,9 +61,7 @@ export default function Page() {
         <SectionTitle icon={ICON_IMAGE} as="h1" className="text-xl">
           주제
         </SectionTitle>
-        <p className="text-gray-800 text-lg">
-          - 극한기상에 따른 농림분야 피해와 대책
-        </p>
+        <p className="text-gray-800 text-lg">-</p>
       </section>
 
       {/* 주요 일정 */}
@@ -73,16 +71,13 @@ export default function Page() {
         </SectionTitle>
         <ul className="list-none space-y-2 text-lg text-gray-800">
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            초록 1차 제출: 2025년 6월 5일
+            초록제출 마감(1차): 2025년 11월 14일
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            초록 연장 제출: 2025년 6월 13일
+            온라인 등록기간: 2025년 12월 03일
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            온라인 등록기간: 2025년 6월 20일
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            행사 기간: 2025년 6월 24-25일 (1박 2일)
+            행사 기간: 2025년 12월 04-05일 (1박 2일)
           </li>
         </ul>
       </section>
