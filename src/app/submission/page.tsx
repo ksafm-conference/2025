@@ -54,22 +54,6 @@ export default function Page() {
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             추후 안내
           </li>
-          {/* <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            특별세션 1: 기상재해분야 워크숍 (신농업기후변화대응체계구축사업단)
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            특별세션 2: 농업분야 탄소 저감기술 이행기반 구축 (국립농업과학원)
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            특별세션 3: 산림재난 예방, 대응 강화를 위한 기상 빅데이터 활용
-            (국립산림과학원)
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            특별세션 4: 3청 농림기상 기술공유 워크숍
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            일반세션: 일반구두(oral), 포스터(poster)
-          </li> */}
         </ul>
       </section>
 
