@@ -39,6 +39,9 @@ export default function Page() {
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             저자 중 한 명이 학술대회에 등록해야 합니다.
           </li>
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            발표자가 다른 경우 별도로 등록하여야 합니다.
+          </li>
         </ul>
       </section>
 
@@ -49,6 +52,9 @@ export default function Page() {
         </SectionTitle>
         <ul className="list-none pl-0 space-y-2 text-lg text-gray-900">
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            추후 안내
+          </li>
+          {/* <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             특별세션 1: 기상재해분야 워크숍 (신농업기후변화대응체계구축사업단)
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
@@ -63,7 +69,7 @@ export default function Page() {
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             일반세션: 일반구두(oral), 포스터(poster)
-          </li>
+          </li> */}
         </ul>
       </section>
 
