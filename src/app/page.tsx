@@ -151,7 +151,7 @@ export default function Page() {
                   <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-800" />
                   <div>
                     <p className="font-medium text-lg md:text-xl">{d.label}</p>
-                    <p className="text-lg md:text-xl text-gray-600">{d.date}</p>
+                    <p className="text-lg md:text-xl text-gray-900">{d.date}</p>
                   </div>
                 </li>
               ))}
