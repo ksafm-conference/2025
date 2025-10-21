@@ -74,7 +74,7 @@ export default function Page() {
             초록제출 마감(1차): 2025년 11월 14일
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            온라인 등록기간: 2025년 12월 03일
+            온라인 등록기간: 2025년 12월 03일 까지
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             행사 기간: 2025년 12월 04-05일 (1박 2일)

@@ -110,8 +110,8 @@ export default function Page() {
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             등록 취소 및 환불기간은 아래의 내용 참고 부탁드립니다.
           </li>
-          <li className="relative pl-10">2025년 6월 20일 이전: 전액 환불</li>
-          <li className="relative pl-10">2025년 6월 20일 이후: 문의 요망</li>
+          <li className="relative pl-10">2025년 12월 03일 이전: 전액 환불</li>
+          <li className="relative pl-10">2025년 12월 03일 이후: 문의 요망</li>
         </ul>
       </section>
     </main>

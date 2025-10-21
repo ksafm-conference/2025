@@ -7,7 +7,7 @@ export const home = {
 
   importantDates: [
     { date: "2025-11-14", label: "초록제출 마감(1차)" },
-    { date: "2025-12-03", label: "온라인 등록기간" },
+    { date: "2025-12-03 까지", label: "온라인 등록기간" },
     { date: "2025-12-04 ~ 2025-12-05", label: "행사 기간" },
   ],
 };
