@@ -75,6 +75,9 @@ export default function Page() {
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             장소 및 시간 : 추후 공지
           </li>
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            우수발표상 시상 예정
+          </li>
           {/* <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             포스터 세션: 한국농수산대학교 융합교육관
           </li>
