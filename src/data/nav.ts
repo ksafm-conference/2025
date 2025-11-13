@@ -7,7 +7,7 @@ export const nav: NavItem[] = [
   {
     label: "학술대회 안내",
     items: [
-      // { label: "공지사항", href: "/about/notice" },
+      { label: "공지사항", href: "/about/notice" },
       { label: "학술대회 개요", href: "/about/overview" },
       { label: "초대의 말씀", href: "/about/invitation" },
     ],

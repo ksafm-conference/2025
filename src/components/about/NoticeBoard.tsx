@@ -40,6 +40,7 @@ export default function NoticeBoard() {
                 content={n.content}
                 contentHtml={n.contentHtml}
                 pinned={n.pinned}
+                attachments={n.attachments}
               />
             </li>
           );
@@ -56,6 +57,7 @@ function NoticeCard({
   content,
   contentHtml,
   pinned,
+  attachments,
 }: {
   id: string;
   title: string;
@@ -63,6 +65,15 @@ function NoticeCard({
   content?: string;
   contentHtml?: string;
   pinned?: boolean;
+  attachments?: {
+    label: string;
+    href: string;
+    type?: string;
+    size?: string;
+    external?: boolean;
+    openInNewTab?: boolean;
+    downloadable?: boolean;
+  }[];
 }) {
   const [hi, setHi] = useState(false);
   const htmlRef = useRef<HTMLDivElement | null>(null);
@@ -101,7 +112,7 @@ function NoticeCard({
         }
       });
   }, [contentHtml]);
-
+  console.log(id, attachments);
   return (
     <article
       className={[
@@ -121,7 +132,6 @@ function NoticeCard({
         )}
       </div>
       {date && <p className="mb-2 md:text-md text-gray-700">{date}</p>}
-
       {/* contentHtml 우선, 없으면 content 간단문구 */}
       {contentHtml ? (
         <div
@@ -133,6 +143,56 @@ function NoticeCard({
       ) : content ? (
         <p className=" text-sm md:text-lg leading-6 text-gray-800">{content}</p>
       ) : null}
+      {/* ✅ 첨부파일 섹션 */}
+
+      {attachments && attachments.length > 0 && (
+        <div className="mt-4 rounded-lg border bg-gray-50 p-3">
+          <h4 className="mb-2 text-sm font-semibold text-gray-800">첨부파일</h4>
+          <ul className="space-y-1">
+            {attachments.map((f) => {
+              // GH Pages 하위경로 대응: 절대경로이면 BASE_PATH prefix
+              const hrefFixed =
+                f.href.startsWith("/") &&
+                typeof BASE_PATH === "string" &&
+                BASE_PATH
+                  ? `${BASE_PATH}${f.href}`
+                  : f.href;
+
+              const target = f.openInNewTab ? "_blank" : undefined;
+              const rel = f.openInNewTab ? "noopener noreferrer" : undefined;
+
+              return (
+                <li
+                  key={f.href}
+                  className="flex items-center justify-between gap-3"
+                >
+                  <a
+                    href={hrefFixed}
+                    target={target}
+                    rel={rel}
+                    download={f.downloadable ? "" : undefined} // ✅ 눌러서 바로 다운로드
+                    className="inline-flex items-center gap-2 text-blue-700 hover:underline"
+                    aria-label={`${f.label} 다운로드`}
+                  >
+                    {/* 파일 타입 뱃지(간단 아이콘 대체) */}
+                    <span className="inline-flex items-center rounded border border-blue-200 bg-white px-1.5 py-0.5 text-[11px] font-semibold text-blue-600">
+                      {f.type?.toUpperCase() ?? "FILE"}
+                    </span>
+                    <span className="text-sm">{f.label}</span>
+                  </a>
+
+                  {/* 용량 표시 */}
+                  {f.size && (
+                    <span className="shrink-0 text-[12px] text-gray-500">
+                      {f.size}
+                    </span>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
     </article>
   );
 }

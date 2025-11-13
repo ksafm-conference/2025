@@ -42,7 +42,44 @@ export const NOTICES: Notice[] = [
     showOnHome: true,
     pinHome: true,
   },
+  {
+    id: "notice-1",
+    title: "2025년 동계학술대회 숙박 예약 안내",
+    date: "2025-11-13",
+    pinned: false,
+    showOnHome: true,
+    contentHtml: `
+      <p>한국농림기상학회 회원님께</p>
+      <p>동계학술대회 기간의 <b>숙박 예약</b>에 대해 알려드립니다.</p>
+      <p>이번 동계학술대회가 개최되는     <a
+              href="https://www.yeosuvenezia.com/"
+              rel="noopener noreferrer"
+              style="text-decoration : underline"
+              target="_blank"
+            >
+              
+            <b>여수베네치아호텔앤스위트</b>
+            </a>에서 아래와 같이 숙박이 가능하오니, 여정에 참고하시기 바랍니다.</p>
 
+      <ul style="margin:.5rem 0 0 1rem;list-style:disc">
+        <li>숙박 장소 : 여수 베네치아호텔&스위트</li>
+        <li>객실 예약은 예약신청서 작성 후, 호텔 메일(<span style="color:#1976d2">info@yeosuvenezia.com</span>)로 송부 <br>(호텔에서 직접 예약 확정 진행)
+        </li>
+      </ul>
+       <p style="margin:.5rem 0 0 ">
+       <img src="/notice/room.png" alt="숙박 예약 안내" style="display:block;margin:.25rem auto 0;max-width:100%;height:auto;border:1px solid #eee;border-radius:8px" />
+      </p>
+    `,
+    attachments: [
+      {
+        label: "여수베네치아_객실예약신청서(25년 한국농림기상학회).docx",
+        href: "/notice/여수베네치아_객실예약신청서(25년 한국농림기상학회).docx",
+        type: "docx",
+        size: "61.88 KB",
+        downloadable: true, // 브라우저에서 곧바로 다운로드
+      },
+    ],
+  },
   // {
   //   id: "notice-68",
   //   title: "발표 진행 안내",
