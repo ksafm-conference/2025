@@ -164,7 +164,6 @@ export default function Page() {
       <section className="mx-auto max-w-6xl px-4 py-10">
         <div className="grid gap-6 md:grid-cols-3">
           {/* 공지 리스트 */}
-          {/* 공지 리스트 */}
           <div className="md:col-span-2">
             <div className="mb-3 flex items-center gap-2">
               <Newspaper className="h-5 w-5" />

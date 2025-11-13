@@ -49,6 +49,14 @@ export default function NoticeBoard() {
     </section>
   );
 }
+// 절대경로(/...)에 BASE_PATH를 프리픽스하는 도우미
+function prefixBasePathInHtml(html?: string) {
+  if (!html || !BASE_PATH) return html ?? "";
+  // src="/..." 또는 href="/..." 를 src="/<repo>/..." 로 변경
+  return html
+    .replace(/(\ssrc=)"\/(?!\/)/g, `$1"${BASE_PATH}/`)
+    .replace(/(\shref=)"\/(?!\/)/g, `$1"${BASE_PATH}/`);
+}
 
 function NoticeCard({
   id,
@@ -112,7 +120,6 @@ function NoticeCard({
         }
       });
   }, [contentHtml]);
-  console.log(id, attachments);
   return (
     <article
       className={[
@@ -137,11 +144,12 @@ function NoticeCard({
         <div
           ref={htmlRef}
           className="prose prose-zinc max-w-none text-sm md:text-lg leading-6 [&_*]:!break-words"
-          // 신뢰된 관리자가 입력한다는 전제. 불특정 사용자 입력이면 sanitize 필요!
-          dangerouslySetInnerHTML={{ __html: contentHtml }}
+          dangerouslySetInnerHTML={{
+            __html: prefixBasePathInHtml(contentHtml),
+          }} // ✅ 첫 렌더부터 안전
         />
       ) : content ? (
-        <p className=" text-sm md:text-lg leading-6 text-gray-800">{content}</p>
+        <p className="text-sm md:text-lg leading-6 text-gray-800">{content}</p>
       ) : null}
       {/* ✅ 첨부파일 섹션 */}
 
