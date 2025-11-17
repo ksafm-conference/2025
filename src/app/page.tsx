@@ -13,7 +13,7 @@ import {
 import { externalLinks } from "@/data/nav";
 import { home } from "@/data/home";
 import { getHomeNotices } from "@/data/notices";
-
+import { asset } from "@/lib/paths";
 export default function Page() {
   // 메인 CTA 3개 정의
   const ctas: {
@@ -101,7 +101,7 @@ export default function Page() {
                     className="inline-flex items-center"
                   >
                     <img
-                      src={s.logo}
+                      src={asset(s.logo)}
                       alt={s.name ?? "sponsorship logo"}
                       className="h-7 w-auto md:h-8"
                     />
