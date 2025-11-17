@@ -51,11 +51,44 @@ export default function NoticeBoard() {
 }
 // 절대경로(/...)에 BASE_PATH를 프리픽스하는 도우미
 function prefixBasePathInHtml(html?: string) {
-  if (!html || !BASE_PATH) return html ?? "";
-  // src="/..." 또는 href="/..." 를 src="/<repo>/..." 로 변경
+  if (!html) return "";
+  if (!BASE_PATH) return html;
+
+  const BP = BASE_PATH.replace(/\/+$/, ""); // '/2025/' -> '/2025'
+
+  // 이미 http(s) 또는 프로토콜-상대(//), data:, mailto:, tel: 등은 건드리지 않음
+  const skip = (url: string) =>
+    /^(https?:)?\/\//i.test(url) ||
+    /^(data:|mailto:|tel:)/i.test(url) ||
+    url.startsWith(`${BP}/`) ||
+    url.startsWith("./") ||
+    url.startsWith("../");
+
+  const add = (url: string) =>
+    skip(url) || !url.startsWith("/") ? url : `${BP}${url}`;
+
   return html
-    .replace(/(\ssrc=)"\/(?!\/)/g, `$1"${BASE_PATH}/`)
-    .replace(/(\shref=)"\/(?!\/)/g, `$1"${BASE_PATH}/`);
+    .replace(
+      /(\ssrc=)(["'])([^"']+)\2/g,
+      (_m, p1, q, v) => `${p1}${q}${add(v)}${q}`
+    )
+    .replace(
+      /(\shref=)(["'])([^"']+)\2/g,
+      (_m, p1, q, v) => `${p1}${q}${add(v)}${q}`
+    )
+    .replace(/(\ssrcset=)(["'])([^"']+)\2/g, (_m, p1, q, list) => {
+      const fixed = list
+        .split(",")
+        .map((s: string) => s.trim())
+        .map((entry: string) => {
+          // "path size" 형식 분리
+          const [path, ...rest] = entry.split(/\s+/);
+          const newPath = add(path);
+          return [newPath, ...rest].join(" ");
+        })
+        .join(", ");
+      return `${p1}${q}${fixed}${q}`;
+    });
 }
 
 function NoticeCard({
@@ -96,30 +129,6 @@ function NoticeCard({
     }
   }, [id]);
 
-  // ✅ GH Pages 하위경로 자동 붙이기: contentHtml 안의 a/img 등 src/href가 "/"로 시작하면 prefix
-  useEffect(() => {
-    const root = htmlRef.current;
-    if (!root) return;
-    const fix = (el: Element, attr: "src" | "href") => {
-      const val = el.getAttribute(attr);
-      if (val && val.startsWith("/") && BASE_PATH) {
-        el.setAttribute(attr, `${BASE_PATH}${val}`);
-      }
-    };
-    root
-      .querySelectorAll("img[src], a[href], link[href], source[srcset]")
-      .forEach((el) => {
-        if (el instanceof HTMLImageElement) fix(el, "src");
-        else if (el instanceof HTMLAnchorElement) fix(el, "href");
-        else if (el instanceof HTMLLinkElement) fix(el, "href");
-        else if (
-          el instanceof HTMLSourceElement &&
-          el.srcset?.startsWith("/")
-        ) {
-          el.srcset = `${BASE_PATH}${el.srcset}`;
-        }
-      });
-  }, [contentHtml]);
   return (
     <article
       className={[
@@ -146,7 +155,7 @@ function NoticeCard({
           className="prose prose-zinc max-w-none text-sm md:text-lg leading-6 [&_*]:!break-words"
           dangerouslySetInnerHTML={{
             __html: prefixBasePathInHtml(contentHtml),
-          }} // ✅ 첫 렌더부터 안전
+          }}
         />
       ) : content ? (
         <p className="text-sm md:text-lg leading-6 text-gray-800">{content}</p>
