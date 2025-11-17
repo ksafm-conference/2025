@@ -4,7 +4,7 @@ import NoticeBoard from "@/components/about/NoticeBoard";
 
 export default function Page() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10">
+    <main className="mx-auto max-w-6xl px-2 md:px-4 py-10">
       {/* breadcrumb */}
       <nav className="mb-6 text-sm text-gray-600" aria-label="breadcrumb">
         <ol className="flex flex-wrap items-center gap-2">

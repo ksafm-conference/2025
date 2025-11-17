@@ -76,7 +76,7 @@ export default function Page() {
             <h1 className="mb-3 text-xl font-extrabold leading-tight md:text-3xl">
               {home.title}
             </h1>
-            <p className="mb-6 text-[15px] leading-relaxed text-gray-700 md:text-lg">
+            <p className="mb-6 text-[15px] leading-relaxed text-gray-900 md:text-lg">
               주제: {home.theme}
               <br />
               <span className="inline-flex items-center gap-2 text-gray-800">
@@ -145,16 +145,37 @@ export default function Page() {
               <Calendar className="h-5 w-5" />
               주요 일정
             </h2>
-            <ul className="space-y-3">
-              {home.importantDates.map((d) => (
-                <li key={d.date} className="flex items-start gap-3">
-                  <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-800" />
-                  <div>
-                    <p className="font-medium text-lg md:text-xl">{d.label}</p>
-                    <p className="text-lg md:text-xl text-gray-900">{d.date}</p>
-                  </div>
-                </li>
-              ))}
+            <ul className="space-y-1">
+              {home.importantDates.map((d) => {
+                const crossed = d.strike === true; // ✅ 수동 플래그만 확인
+                return (
+                  <li key={d.date} className="flex items-start gap-3">
+                    <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-800" />
+                    <div>
+                      <p
+                        className={[
+                          "font-medium text-lg md:text-xl",
+                          crossed
+                            ? "line-through text-gray-500"
+                            : "text-gray-900",
+                        ].join(" ")}
+                      >
+                        {d.label}
+                      </p>
+                      <p
+                        className={[
+                          "text-lg md:text-xl",
+                          crossed
+                            ? "line-through text-gray-500"
+                            : "text-gray-900",
+                        ].join(" ")}
+                      >
+                        {d.date}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>

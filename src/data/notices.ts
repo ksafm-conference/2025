@@ -125,9 +125,15 @@ export function getHomeNotices(limit = 6) {
   }));
 }
 
+/** id에 'notice-'가 이미 있으면 그대로, 없으면 붙여서 앵커 id로 사용 */
+export function anchorIdFor(n: Notice) {
+  if (!n.id) return "";
+  return n.id.startsWith("notice-") ? n.id : `notice-${n.id}`;
+}
+/** href 우선, 없으면 /about/notice#<앵커ID> */
 export function buildNoticeHref(n: Notice): string {
   if (n.href) return n.href;
-  if (n.id) return `/about/notice#notice-${n.id}`;
+  if (n.id) return `/about/notice#${anchorIdFor(n)}`;
   return "#";
 }
 

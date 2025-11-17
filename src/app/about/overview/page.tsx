@@ -61,7 +61,9 @@ export default function Page() {
         <SectionTitle icon={ICON_IMAGE} as="h1" className="text-xl">
           주제
         </SectionTitle>
-        <p className="text-gray-800 text-lg">-</p>
+        <p className="text-gray-800 text-lg">
+          2025 한국 기후위기 종합 평가와 농림기상 미래전략
+        </p>
       </section>
 
       {/* 주요 일정 */}
@@ -70,7 +72,7 @@ export default function Page() {
           주요 일정
         </SectionTitle>
         <ul className="list-none space-y-2 text-lg text-gray-800">
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-'] line-through text-gray-500">
             초록제출 마감(1차): 2025년 11월 14일
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">

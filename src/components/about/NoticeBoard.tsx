@@ -1,7 +1,7 @@
 // FILE: src/components/about/NoticeBoard.tsx
 "use client";
 
-import { NOTICES } from "@/data/notices";
+import { NOTICES, anchorIdFor } from "@/data/notices";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Megaphone } from "lucide-react";
 import { BASE_PATH } from "@/lib/paths"; // 이전에 만든 basePath 헬퍼: export const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "";
@@ -22,7 +22,7 @@ export default function NoticeBoard() {
   return (
     <section
       id="about-notice"
-      className="scroll-mt-24 rounded-2xl border bg-white p-5 shadow-sm"
+      className="scroll-mt-24 rounded-2xl border bg-white p-1 md:p-5 shadow-sm"
     >
       {/* <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">
         <Megaphone className="h-5 w-5" /> 공지사항
@@ -30,7 +30,7 @@ export default function NoticeBoard() {
 
       <ul className="grid gap-3 md:grid-cols-1">
         {items.map((n) => {
-          const anchorId = `notice-${n.id}`;
+          const anchorId = anchorIdFor(n); // ✅ 여기만 바꾸면 됨
           return (
             <li key={anchorId} id={anchorId} className="scroll-mt-24">
               <NoticeCard
