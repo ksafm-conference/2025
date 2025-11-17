@@ -7,7 +7,8 @@ import {
   ArrowRight,
   Newspaper,
   ChevronRight,
-  Pin, // ▶ 추가: 화살표 아이콘
+  Pin,
+  Handshake, // ▶ 추가: 화살표 아이콘
 } from "lucide-react";
 import { externalLinks } from "@/data/nav";
 import { home } from "@/data/home";
@@ -70,21 +71,42 @@ export default function Page() {
       <section className="border-b bg-white">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-10 md:grid-cols-2">
           <div>
-            <p className="mb-2 text-[11px] md:text-xs font-semibold tracking-widest text-gray-500">
-              {home.society}
-            </p>
-            <h1 className="mb-3 text-xl font-extrabold leading-tight md:text-3xl">
-              {home.title}
-            </h1>
-            <p className="mb-6 text-[15px] leading-relaxed text-gray-900 md:text-lg">
+            <div>
+              <p className="mb-2 text-[11px] md:text-sm font-semibold tracking-widest text-gray-500">
+                {home.society}
+              </p>
+              <h1 className="mb-3 text-xl font-extrabold leading-tight md:text-3xl">
+                {home.title}
+              </h1>
+            </div>
+            <p className="h-full space-y-3 mb-6 text-[15px] leading-relaxed text-gray-900 md:text-lg ">
               주제: {home.theme}
               <br />
               <span className="inline-flex items-center gap-2 text-gray-800">
-                <Calendar className="h-4 w-4" /> {home.dateText}
+                일시: {home.dateText}
               </span>
               <br />
               <span className="inline-flex items-center gap-2 text-gray-800">
-                <MapPin className="h-4 w-4" /> {home.venueText}
+                장소: {home.venueText}
+              </span>
+              <br />
+              <span className="inline-flex items-center gap-2 text-gray-800">
+                후원:{" "}
+                {home.sponsorship.map((s) => (
+                  <a
+                    key={s.url}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center"
+                  >
+                    <img
+                      src={s.logo}
+                      alt={s.name ?? "sponsorship logo"}
+                      className="h-7 w-auto md:h-8"
+                    />
+                  </a>
+                ))}
               </span>
             </p>
 

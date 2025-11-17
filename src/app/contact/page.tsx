@@ -18,12 +18,14 @@ export default function Page() {
       </SectionTitle>
       <section className="space-y-5">
         <div className="space-y-2">
-          <p className="text-lg flex gap-1 items-center">
-            <MapPinHouse />
-            주소 : 전남 여수시 오동도로 61-13{" "}
+          <p className="text-lg md:flex gap-1 items-center">
+            <div className="flex gap-1">
+              <MapPinHouse />
+              주소 : 전남 여수시 오동도로 61-13
+            </div>
             <a
               href="https://www.yeosuvenezia.com/"
-              className="underline underline-offset-2"
+              className="underline underline-offset-2 ml-16 md:ml-0"
               rel="noopener noreferrer"
               target="_blank"
             >

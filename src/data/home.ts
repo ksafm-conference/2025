@@ -4,6 +4,13 @@ export const home = {
   theme: "2025 한국 기후위기 종합 평가와 농림기상 미래전략",
   dateText: "2025년 12월 04–05일",
   venueText: "여수 베네치아 호텔&스위트 (전남여수)",
+  sponsorship: [
+    {
+      logo: "/sponsorship/ncam.png",
+      url: "http://www.ncam.kr/",
+      name: "NCAM",
+    },
+  ],
 
   importantDates: [
     { date: "2025-11-14", label: "초록제출 마감(1차)", strike: true },
