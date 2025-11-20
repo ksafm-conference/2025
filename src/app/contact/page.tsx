@@ -19,10 +19,10 @@ export default function Page() {
       <section className="space-y-5">
         <div className="space-y-2">
           <p className="text-lg md:flex gap-1 items-center">
-            <div className="flex gap-1">
+            <span className="flex gap-1">
               <MapPinHouse />
               주소 : 전남 여수시 오동도로 61-13
-            </div>
+            </span>
             <a
               href="https://www.yeosuvenezia.com/"
               className="underline underline-offset-2 ml-16 md:ml-0"
@@ -33,7 +33,8 @@ export default function Page() {
             </a>
           </p>
           <p className="text-lg flex gap-1 items-center">
-            <Phone /> 전화 : 061-664-0001
+            <Phone />
+            <a href="tel:0616640001"> 전화 : 061-664-0001</a>
           </p>
         </div>
 

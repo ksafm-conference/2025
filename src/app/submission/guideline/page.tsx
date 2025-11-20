@@ -73,20 +73,11 @@ export default function Page() {
             권장)
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            장소 및 시간 : 추후 공지
+            장소 및 시간 : 부라노 - 3홀 상시
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             우수발표상 시상 예정
           </li>
-          {/* <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            포스터 세션: 한국농수산대학교 융합교육관
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            포스터 부착: 12월 04일 12:00 ~
-          </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            포스터 철거: 12월 05일 12:00 ~
-          </li> */}
         </ul>
       </section>
     </main>
