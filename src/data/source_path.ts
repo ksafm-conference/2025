@@ -1,5 +1,5 @@
 export const FAVICON_IMAGE = "ksafm_logo.ico";
 export const ICON_IMAGE = "icon.png";
 export const PROGRAM_IMAGE = "program/schedule/program_image.jpg";
-export const TEMPLATE_DOC = "files/(KSAFM)2025하계_초록제출양식.hwp";
+export const TEMPLATE_DOC = "files/(KSAFM)2025동계_초록제출양식.hwp";
 export const DOT_IMAGE = "dot.png";

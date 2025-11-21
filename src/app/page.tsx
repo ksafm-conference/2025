@@ -7,12 +7,13 @@ import {
   ArrowRight,
   Newspaper,
   ChevronRight,
-  Pin, // ▶ 추가: 화살표 아이콘
+  Pin,
+  Handshake, // ▶ 추가: 화살표 아이콘
 } from "lucide-react";
 import { externalLinks } from "@/data/nav";
 import { home } from "@/data/home";
 import { getHomeNotices } from "@/data/notices";
-
+import { asset } from "@/lib/paths";
 export default function Page() {
   // 메인 CTA 3개 정의
   const ctas: {
@@ -70,21 +71,42 @@ export default function Page() {
       <section className="border-b bg-white">
         <div className="mx-auto grid max-w-6xl grid-cols-1 items-center gap-10 px-4 py-10 md:grid-cols-2">
           <div>
-            <p className="mb-2 text-[11px] md:text-xs font-semibold tracking-widest text-gray-500">
-              {home.society}
-            </p>
-            <h1 className="mb-3 text-xl font-extrabold leading-tight md:text-3xl">
-              {home.title}
-            </h1>
-            <p className="mb-6 text-[15px] leading-relaxed text-gray-700 md:text-lg">
+            <div>
+              <p className="mb-2 text-[11px] md:text-sm font-semibold tracking-widest text-gray-500">
+                {home.society}
+              </p>
+              <h1 className="mb-3 text-xl font-extrabold leading-tight md:text-3xl">
+                {home.title}
+              </h1>
+            </div>
+            <p className="h-full space-y-3 mb-6 text-[15px] leading-relaxed text-gray-900 md:text-lg ">
               주제: {home.theme}
               <br />
               <span className="inline-flex items-center gap-2 text-gray-800">
-                <Calendar className="h-4 w-4" /> {home.dateText}
+                일시: {home.dateText}
               </span>
               <br />
               <span className="inline-flex items-center gap-2 text-gray-800">
-                <MapPin className="h-4 w-4" /> {home.venueText}
+                장소: {home.venueText}
+              </span>
+              <br />
+              <span className="inline-flex items-center gap-2 text-gray-800">
+                후원:{" "}
+                {home.sponsorship.map((s) => (
+                  <a
+                    key={s.url}
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center"
+                  >
+                    <img
+                      src={asset(s.logo)}
+                      alt={s.name ?? "sponsorship logo"}
+                      className="h-7 w-auto md:h-8"
+                    />
+                  </a>
+                ))}
               </span>
             </p>
 
@@ -145,16 +167,37 @@ export default function Page() {
               <Calendar className="h-5 w-5" />
               주요 일정
             </h2>
-            <ul className="space-y-3">
-              {home.importantDates.map((d) => (
-                <li key={d.date} className="flex items-start gap-3">
-                  <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-800" />
-                  <div>
-                    <p className="font-medium text-lg md:text-xl">{d.label}</p>
-                    <p className="text-lg md:text-xl text-gray-600">{d.date}</p>
-                  </div>
-                </li>
-              ))}
+            <ul className="space-y-1">
+              {home.importantDates.map((d) => {
+                const crossed = d.strike === true; // ✅ 수동 플래그만 확인
+                return (
+                  <li key={d.date} className="flex items-start gap-3">
+                    <div className="mt-2 h-1.5 w-1.5 rounded-full bg-gray-800" />
+                    <div>
+                      <p
+                        className={[
+                          "font-medium text-lg md:text-xl",
+                          crossed
+                            ? "line-through text-gray-500"
+                            : "text-gray-900",
+                        ].join(" ")}
+                      >
+                        {d.label}
+                      </p>
+                      <p
+                        className={[
+                          "text-lg md:text-xl",
+                          crossed
+                            ? "line-through text-gray-500"
+                            : "text-gray-900",
+                        ].join(" ")}
+                      >
+                        {d.date}
+                      </p>
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
         </div>
@@ -163,7 +206,6 @@ export default function Page() {
       {/* 중간 영역: 공지 + 바로가기 카드 */}
       <section className="mx-auto max-w-6xl px-4 py-10">
         <div className="grid gap-6 md:grid-cols-3">
-          {/* 공지 리스트 */}
           {/* 공지 리스트 */}
           <div className="md:col-span-2">
             <div className="mb-3 flex items-center gap-2">

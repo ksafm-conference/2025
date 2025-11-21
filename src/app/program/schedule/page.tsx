@@ -18,9 +18,39 @@ export default function Page() {
   // 라이트박스 상태
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null);
   const [zoomed, setZoomed] = useState(false);
-  const SCALE = 1.8;
 
-  // 확대 기준 크기
+  // md 이상 여부
+  const [isMdUp, setIsMdUp] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    const handleChange = (event: MediaQueryListEvent) => {
+      setIsMdUp(event.matches);
+    };
+    // 초기값
+    setIsMdUp(mq.matches);
+    mq.addEventListener("change", handleChange);
+    return () => {
+      mq.removeEventListener("change", handleChange);
+    };
+  }, []);
+
+  // 화면(뷰포트) 크기
+  const [viewport, setViewport] = useState({ w: 0, h: 0 });
+
+  useEffect(() => {
+    const update = () => {
+      setViewport({
+        w: window.innerWidth,
+        h: window.innerHeight,
+      });
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  // 확대 기준 크기 (이미지 원본 크기)
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const [baseSize, setBaseSize] = useState<{ w: number; h: number }>({
@@ -50,17 +80,42 @@ export default function Page() {
   const handleImgLoaded = () => {
     const el = imgRef.current;
     if (!el) return;
-    const rect = el.getBoundingClientRect();
-    setBaseSize({ w: rect.width, h: rect.height });
+    // 원본 픽셀 기준으로 저장
+    setBaseSize({ w: el.naturalWidth, h: el.naturalHeight });
   };
+
+  // 화면/이미지 크기에 따라 자동으로 "화면 안에 들어가도록" 배율 계산
+  const baseFitScale = (() => {
+    if (!baseSize.w || !baseSize.h || !viewport.w || !viewport.h) {
+      // 아직 정보 없으면 임시값
+      return isMdUp ? 1.0 : 0.5;
+    }
+
+    // 가로·세로 각각 화면 안에 들어가도록 필요한 배율
+    const scaleByWidth = (viewport.w * 0.9) / baseSize.w; // 좌우 여백 10%
+    const scaleByHeight = (viewport.h * 0.8) / baseSize.h; // 상하 여백 20%
+
+    // 둘 중 더 작은 쪽으로 맞춰야 화면 안에 다 들어감
+    return Math.min(scaleByWidth, scaleByHeight);
+  })();
+
+  // md 이상: 최대 100%까지만
+  // md 미만(모바일): fitScale을 조금 더 줄여서 여유 있게 표시
+  const fitScale = isMdUp ? Math.min(1.0, baseFitScale) : baseFitScale * 1;
+
+  // 확대 배율: 기본에서 조금 더 키운 값
+  const zoomScale = isMdUp ? fitScale * 2 : fitScale * 2;
+
+  // 최종 현재 배율
+  const currentScale = zoomed ? zoomScale : fitScale;
 
   // 확대/축소 시 스크롤 중앙 맞춤
   useEffect(() => {
     const el = scrollerRef.current;
     if (!el || baseSize.w === 0) return;
     if (zoomed) {
-      const contentW = baseSize.w * SCALE;
-      const contentH = baseSize.h * SCALE;
+      const contentW = baseSize.w * zoomScale;
+      const contentH = baseSize.h * zoomScale;
       el.scrollTo({
         left: Math.max(0, (contentW - el.clientWidth) / 2),
         top: Math.max(0, (contentH - el.clientHeight) / 2),
@@ -68,7 +123,7 @@ export default function Page() {
     } else {
       el.scrollTo({ left: 0, top: 0 });
     }
-  }, [zoomed, baseSize.w, baseSize.h]);
+  }, [zoomed, baseSize.w, baseSize.h, zoomScale]);
 
   // 드래그-팬 핸들러
   const onPointerDown: React.PointerEventHandler<HTMLDivElement> = (e) => {
@@ -86,6 +141,7 @@ export default function Page() {
     (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
     e.preventDefault();
   };
+
   const onPointerMove: React.PointerEventHandler<HTMLDivElement> = (e) => {
     if (!isPanning || !zoomed) return;
     const el = scrollerRef.current;
@@ -96,12 +152,15 @@ export default function Page() {
     el.scrollLeft = panStart.current.sx - dx;
     el.scrollTop = panStart.current.sy - dy;
   };
+
   const endPan = (e: React.PointerEvent<HTMLDivElement>) => {
     if (!isPanning) return;
     setIsPanning(false);
     try {
       (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    } catch {}
+    } catch {
+      // ignore
+    }
   };
 
   return (
@@ -125,7 +184,7 @@ export default function Page() {
         </ol>
       </nav>
 
-      {1 ? (
+      {0 ? (
         <ComingSoon />
       ) : (
         <>
@@ -137,9 +196,10 @@ export default function Page() {
               >
                 <button
                   type="button"
-                  className="block w-full cursor-zoom-in"
+                  className="block md:w-full cursor-zoom-in"
                   onClick={() => {
                     setLightboxIdx(i);
+                    // 처음 열 때는 항상 "기본 배율" 상태
                     setZoomed(false);
                   }}
                   aria-label={`${img.alt} 확대 보기`}
@@ -147,7 +207,7 @@ export default function Page() {
                   <img
                     src={img.src}
                     alt={img.alt}
-                    className="h-auto w-full rounded-lg"
+                    className="h-auto w-auto rounded-lg"
                     loading="lazy"
                   />
                 </button>
@@ -219,15 +279,9 @@ export default function Page() {
                 >
                   <div
                     style={{
-                      width: baseSize.w
-                        ? zoomed
-                          ? baseSize.w * SCALE
-                          : baseSize.w
-                        : undefined,
+                      width: baseSize.w ? baseSize.w * currentScale : undefined,
                       height: baseSize.h
-                        ? zoomed
-                          ? baseSize.h * SCALE
-                          : baseSize.h
+                        ? baseSize.h * currentScale
                         : undefined,
                     }}
                   >

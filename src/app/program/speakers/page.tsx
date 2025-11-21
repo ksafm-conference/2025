@@ -5,13 +5,13 @@ import { SPEAKERS, type Speaker } from "@/data/program";
 import SectionTitle from "@/components/SectionTitle";
 import { ICON_IMAGE } from "@/data/source_path";
 import ComingSoon from "@/components/ComingSoon";
-
+import { asset } from "@/lib/paths";
 type AnySpeaker = (typeof SPEAKERS)[number];
 
 // 연사 배열 -> { 분야명: 연사[] } 로 그룹핑 (field | fields 둘 다 지원)
 function groupByField(list: AnySpeaker[]) {
   const groups: Record<string, AnySpeaker[]> = {};
-  const FALLBACK = "기타(Etc)";
+  const FALLBACK = "초청연사";
 
   for (const sp of list) {
     const fields: string[] = Array.isArray((sp as any).fields)
@@ -29,18 +29,19 @@ function groupByField(list: AnySpeaker[]) {
   }
 
   // 각 그룹 내부 정렬(이름 기준)
-  for (const k of Object.keys(groups)) {
-    groups[k].sort((a, b) => (a.name || "").localeCompare(b.name || "", "ko"));
-  }
+  // for (const k of Object.keys(groups)) {
+  //   groups[k].sort((a, b) => (a.name || "").localeCompare(b.name || "", "ko"));
+  // }
   return groups;
 }
 
 export default function Page() {
   const hasData = SPEAKERS.length > 0;
   const groups = hasData ? groupByField(SPEAKERS) : {};
-  const groupNames = Object.keys(groups).sort((a, b) =>
-    a.localeCompare(b, "ko")
-  );
+  const groupNames = Object.keys(groups);
+  // const groupNames = Object.keys(groups).sort((a, b) =>
+  //   a.localeCompare(b, "ko")
+  // );
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-10">
@@ -62,26 +63,15 @@ export default function Page() {
           </li>
         </ol>
       </nav>
+      {/* 
+      <h1 className="mb-8 text-2xl font-bold md:text-3xl">
+        초청 연사 (Speakers)
+      </h1> */}
 
-      {/* <h1 className='mb-8 text-2xl font-bold md:text-3xl'>초청 연사 (Speakers)</h1> */}
-
-      {1 ? (
+      {false ? (
         <ComingSoon />
       ) : (
         <>
-          {/* 분야 빠른이동(선택) */}
-          {/* <div className="mb-6 flex flex-wrap gap-2 text-sm">
-            {groupNames.map((g) => (
-              <a
-                key={g}
-                href={`#field-${encodeURIComponent(g)}`}
-                className="rounded-full border px-3 py-1 hover:bg-gray-50"
-              >
-                {g}
-              </a>
-            ))}
-          </div> */}
-
           {/* 분야별 섹션 */}
           {groupNames.map((g) => (
             <section
@@ -92,35 +82,36 @@ export default function Page() {
               <SectionTitle icon={ICON_IMAGE} as="h1" className="text-xl">
                 {g}
               </SectionTitle>
-              <div className="grid gap-6 sm:grid-cols-1 lg:grid-cols-2">
+              <div className="grid gap-6">
                 {groups[g].map((sp: Speaker) => (
                   <article
                     key={sp.name}
                     className="rounded-2xl border bg-white p-4 shadow-sm"
                   >
                     <div className="m-1 flex items-center gap-3">
-                      {/* {'photo' in sp && sp.photo ? (
+                      {"photo" in sp && sp.photo ? (
                         <img
-                          src={sp.photo as string}
+                          src={asset(sp.photo) as string}
                           alt={sp.name}
-                          className='h-16 w-16 rounded-full object-cover'
+                          className="h-20 w-20 md:h-36 md:w-32 rounded-full object-cover"
                         />
                       ) : (
-                        <div className='flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-base font-semibold text-gray-700'>
+                        <div className="flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 text-base font-semibold text-gray-700">
                           {sp.name.slice(0, 1)}
                         </div>
-                      )} */}
-                      <div>
-                        <h3 className="text-base font-semibold text-gray-900">
-                          - {sp.name}
+                      )}
+                      <div className="space-y-3 md:space-y-5">
+                        <h3 className="text-base md:text-xl font-semibold text-gray-900">
+                          - {sp.affiliation}
+                          <span> </span>
+                          {sp.name}
                           <span> </span>
                           {sp.title}
                         </h3>
-                        {"affiliation" in sp && sp.affiliation && (
-                          <p className="mt-0.5 items-center gap-1 text-base text-gray-900">
-                            - {sp.affiliation as string}
-                          </p>
-                        )}
+
+                        <h3 className="text-base md:text-xl font-semibold text-gray-900">
+                          - {sp.presentation_title}
+                        </h3>
                       </div>
                     </div>
                   </article>

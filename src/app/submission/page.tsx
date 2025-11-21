@@ -29,18 +29,22 @@ export default function Page() {
           초록 제출
         </SectionTitle>
 
-        <ul className="list-none pl-0 space-y-2 text-lg text-gray-900">
+        <ul className="list-none pl-0 space-y-2 text-sm md:text-lg text-gray-900">
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            초록은 마감일까지 제출해야 합니다.
+            초록은 마감일을 확인하신 후 기한 내 제출해 주시기 바랍니다.
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            저자 중 한 명이 학술대회에서 발표해야 합니다.
+            학술대회에서는 초록의 첫 번째 저자가 발표하는 것이 원칙입니다.
+            <br />
+            (※ 부득이한 경우 공동저자 중 한 명이 발표 가능합니다.)
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            저자 중 한 명이 학술대회에 등록해야 합니다.
+            학술대회 등록 1회로 최대 3편의 초록을 제출 및 발표하실 수 있으며,
+            4편 이상 등록을 원하실 경우 추가 등록이 필요합니다.
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            발표자가 다른 경우 별도로 등록하여야 합니다.
+            여러 편의 초록 등록 시, 첫 번째 저자가 다른 경우에는 저자별로 각각
+            등록해야 합니다.
           </li>
         </ul>
       </section>
@@ -50,9 +54,15 @@ export default function Page() {
         <SectionTitle icon={ICON_IMAGE} as="h1" className="text-xl">
           발표 분야 안내
         </SectionTitle>
-        <ul className="list-none pl-0 space-y-2 text-lg text-gray-900">
+        <ul className="list-none pl-0 space-y-2 text-sm md:text-lg text-gray-900">
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
-            추후 안내
+            주제: 2025 한국 기후위기 평가와 농림기상 미래전략
+            <br /> (2025 Korea Climate Crisis Assessment and Agrometeorological
+            Future Strategies)
+          </li>
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+            분야: 경지미기후, 국지기후, 농업기후개조, 산림기상, 식물병해충,
+            환경계측, 생태모형, 영농활용, 수문기상, 농업원격탐사 등
           </li>
         </ul>
       </section>
@@ -62,7 +72,7 @@ export default function Page() {
         <SectionTitle icon={ICON_IMAGE} as="h1" className="text-xl">
           초록 제출 절차
         </SectionTitle>
-        <ul className="list-none pl-0 space-y-2 text-lg text-gray-900">
+        <ul className="list-none pl-0 space-y-2 text-sm md:text-lg text-gray-900">
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
             초록 제출 정보 및 프레젠테이션 가이드라인을 확인합니다.
           </li>
