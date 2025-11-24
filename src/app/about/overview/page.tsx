@@ -75,7 +75,7 @@ export default function Page() {
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-'] line-through text-gray-500">
             초록제출 마감(1차): 2025년 11월 14일
           </li>
-          <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
+          <li className="relative pl-4 before:absolute before:left-0 before:content-['-'] line-through text-gray-500">
             초록제출 최종마감 : 2025년 11월 21일
           </li>
           <li className="relative pl-4 before:absolute before:left-0 before:content-['-']">
