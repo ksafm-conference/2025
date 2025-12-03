@@ -80,6 +80,27 @@ export const NOTICES: Notice[] = [
       },
     ],
   },
+  {
+    id: "notice-2'",
+    title: "2025년 동계학술대회 세부일정표 알림",
+    date: "2025-12-03",
+    pinned: true,
+    showOnHome: true,
+    contentHtml: `
+      <p>한국농림기상학회 회원님께</p>
+      <p>2025년 동계학술대회 세부일정표를 첨부하오니, 여정에 참고하시기 바랍니다.</p>
+      <p>첨부파일을 확인부탁드립니다.</p>
+    `,
+    attachments: [
+      {
+        label: "(ksafm)2025_동계학술대회_브러슈어.pdf",
+        href: "/notice/(ksafm)2025_동계학술대회_브러슈어.pdf",
+        type: ".pdf",
+        size: "7.18 MB",
+        downloadable: true, // 브라우저에서 곧바로 다운로드
+      },
+    ],
+  },
   // {
   //   id: "notice-68",
   //   title: "발표 진행 안내",

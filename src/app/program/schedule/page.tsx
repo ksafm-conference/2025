@@ -5,13 +5,23 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { X, ZoomIn, ZoomOut } from "lucide-react";
 import { asset } from "@/lib/paths";
-import { PROGRAM_IMAGE } from "@/data/source_path";
+import {
+  PROGRAM_IMAGE,
+  PROGRAM_IMAGE_01,
+  PROGRAM_IMAGE_02,
+  PROGRAM_IMAGE_03,
+  PROGRAM_IMAGE_04,
+} from "@/data/source_path";
 import ComingSoon from "@/components/ComingSoon";
 
 export default function Page() {
   // 이미지 파일은 public 경로에 있어야 합니다.
   const images: { src: string; alt: string; caption?: string }[] = [
     { src: asset(PROGRAM_IMAGE), alt: "프로그램" },
+    { src: asset(PROGRAM_IMAGE_01), alt: "프로그램" },
+    { src: asset(PROGRAM_IMAGE_02), alt: "프로그램" },
+    { src: asset(PROGRAM_IMAGE_03), alt: "프로그램" },
+    { src: asset(PROGRAM_IMAGE_04), alt: "프로그램" },
     // 이미지가 아직 없으면 위 배열을 [] 로 두세요.
   ];
 

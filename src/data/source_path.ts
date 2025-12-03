@@ -1,5 +1,10 @@
 export const FAVICON_IMAGE = "ksafm_logo.ico";
 export const ICON_IMAGE = "icon.png";
 export const PROGRAM_IMAGE = "program/schedule/program_image.jpg";
+export const PROGRAM_IMAGE_01 = "program/schedule/program_01.jpg";
+export const PROGRAM_IMAGE_02 = "program/schedule/program_02.jpg";
+export const PROGRAM_IMAGE_03 = "program/schedule/program_03.jpg";
+export const PROGRAM_IMAGE_04 = "program/schedule/program_04.jpg";
 export const TEMPLATE_DOC = "files/(KSAFM)2025동계_초록제출양식.hwp";
+export const PROGRAM_PDF = "files/(ksafm)2025_동계학술대회_브러슈어.pdf";
 export const DOT_IMAGE = "dot.png";
